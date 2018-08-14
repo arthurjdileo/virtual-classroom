@@ -1,5 +1,4 @@
 CMU 15-112 Term Project
-Design Proposal
 
 Project Name: Virtual Classroom
 
