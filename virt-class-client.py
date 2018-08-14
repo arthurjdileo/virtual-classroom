@@ -64,22 +64,19 @@ def convertImages(imgs):
     for img in imgs:
         img.convert()
 
-def reset(data):
-    data.cursor.oldx, data.cursor.oldy = None, None
-
-
 ###########################
 # Main Functions
 ###########################
 
 def init(data):
     data.whiteboard = Whiteboard()
-    data.brush = Brush("Placeholder")
+    data.brush = Brush("One Sad, Alone & Unconnected Brush")
     data.stroke = Stroke()
     data.cursor = Struct()
 
     data.currentTool = "brush"
     data.prevTool = "brush"
+    # stores all necessary details to draw specific tools/their features
     data.strokes = list()
     data.toolPos = dict()
     data.shapePos = list()
@@ -100,14 +97,23 @@ def init(data):
 
     data.colorChooser = ColorChooser()
     data.shapes = Shapes(data)
+    #anchor is starting point for shape and end is once last click is processed
     data.anchorX, data.anchorY, data.endX, data.endY = None, None, None, None
+    # isAnchored - is point anchored yet?
+    # selectedShape - has a shape been selected yet?
+    # have we finished the shape by getting to populate end data fields?
     data.shape,data.isAnchored,data.selectedShape,data.finishedShape = None, False, False, False
 
     data.image = Image()
+    # have we selected the img yet?
     data.selectedImage = False
+    # have we selected point for img yet?
     data.finishedImage = False
 
     data.text = None
+    # finishedText - have we stopped typing and selected a point for placement?
+    # selectedText - once text has been finished and entered
+    # isTyping - is the user typing?
     data.finishedText, data.selectedText, data.isTyping = False, False, False
     data.nextStep = False
 
@@ -164,15 +170,18 @@ def mouseReleased(event, data):
 
 
 def keyPressed(event, data):
+    print(event.keysym)
     if event.keysym == "bracketleft":
         data.brush.changeSize(data, -2)
     elif event.keysym == 'bracketright':
         data.brush.changeSize(data, 2)
 
-    if data.currentTool == "text" and data.isTyping == True and data.text != None:
+    if data.currentTool == "text" and data.isTyping and data.text != None:
         if event.keysym == "Return":
             data.isTyping = False
             data.selectedText = True
+        elif event.keysym == "BackSpace":
+            data.text.text = data.text.text[:len(data.text.text)-1]
         else:
             data.text.text += event.char
 
