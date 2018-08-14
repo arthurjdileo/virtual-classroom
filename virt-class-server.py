@@ -10,7 +10,7 @@ import socket
 import threading
 from queue import Queue
 
-HOST = ''
+HOST = '127.0.0.1'
 PORT = 50003
 BACKLOG = 30  # max clients
 

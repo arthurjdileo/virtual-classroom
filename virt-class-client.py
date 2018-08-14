@@ -31,7 +31,7 @@ from whiteboard import *
 # Client-Server Code
 ###########################
 # HOST = "172.24.140.6"
-HOST = ""
+HOST = "127.0.0.1"
 PORT = 50003
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -152,6 +152,7 @@ def mouseReleased(event, data):
 
         data.shape.finishShape(data)
     if data.finishedImage:
+        data.image.filePath = data.image.filePath.replace(" ", "|")
         data.imagePos.append(data.image)
         msg = "spawnImage %s %f %f\n" % (data.image.filePath, data.image.x,data.image.y)
         print("sending: ",msg)
@@ -231,6 +232,7 @@ def timerFired(data):
             data.shapePos.append(newShape)
         elif command == "spawnImage":
             filePath = msg[2]
+            filePath = filePath.replace("|", " ")
             x = float(msg[3])
             y = float(msg[4])
             newImage = Image()

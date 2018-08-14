@@ -311,7 +311,8 @@ class Image(Whiteboard):
     def browse(self, root):
         root.update()
         root.filename = filedialog.askopenfilename(initialdir="/Desktop",
-                                                   title="Select file")
+                                                   title="Select file",
+                                                   filetypes=[("GIF Files","*.gif")])
         root.update()
         self.filePath = root.filename
         self.tkImage = PhotoImage(file=self.filePath)
