@@ -145,6 +145,17 @@ def mousePressed(event, data, root):
             data.selectedText = True
     data.nextStep = True
 
+def rightPressed(event,data,root):
+    if data.currentTool == "shapes" and data.isAnchored:
+        data.anchorX, data.anchorY, data.endX, data.endY = None, None, None, None
+        data.shape, data.isAnchored, data.selectedShape, data.finishedShape = None, False, False, False
+        data.currentTool = "brush"
+    if data.currentTool == "image" and data.selectedImage:
+        data.selectedImage = False
+        data.finishedImage = False
+        data.image = Image()
+        data.currentTool = "brush"
+
 
 def mouseReleased(event, data):
     if data.finishedShape and data.isAnchored:
@@ -170,7 +181,6 @@ def mouseReleased(event, data):
 
 
 def keyPressed(event, data):
-    print(event.keysym)
     if event.keysym == "bracketleft":
         data.brush.changeSize(data, -2)
     elif event.keysym == 'bracketright':
@@ -330,6 +340,10 @@ def run(width=300, height=300,serverMsg=None, server=None):
         mousePressed(event,data, root)
         redrawAllWrapper(canvas,data, root)
 
+    def rightPressedWrapper(event, canvas,data,root):
+        rightPressed(event,data,root)
+        redrawAllWrapper(canvas,data,root)
+
     #  source 6
     def mouseWrapper(mouseFn, event, canvas, data):
         if data.mouseWrapperMutex: return
@@ -350,6 +364,7 @@ def run(width=300, height=300,serverMsg=None, server=None):
             msg = "brushEnd\n"
             data.server.send(msg.encode())
         data.stroke.reset()
+
 
     def timerFiredWrapper(canvas, data, root):
         timerFired(data)
@@ -376,6 +391,8 @@ def run(width=300, height=300,serverMsg=None, server=None):
 
     root.bind("<ButtonPress-1>", lambda event:
                             mousePressedWrapper(event,canvas,data, root))
+    root.bind("<ButtonPress-3>", lambda event:
+                            rightPressedWrapper(event,canvas,data,root))
     root.bind("<KeyPress>", lambda event:
                             keyPressedWrapper(event, canvas, data))
     root.bind('<Motion>', lambda event:
