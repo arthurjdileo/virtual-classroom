@@ -146,15 +146,22 @@ def mousePressed(event, data, root):
     data.nextStep = True
 
 def rightPressed(event,data,root):
-    if data.currentTool == "shapes" and data.isAnchored:
+    if data.currentTool == "shapes":
         data.anchorX, data.anchorY, data.endX, data.endY = None, None, None, None
         data.shape, data.isAnchored, data.selectedShape, data.finishedShape = None, False, False, False
+        data.shapes.currentShape = None
         data.currentTool = "brush"
     if data.currentTool == "image" and data.selectedImage:
         data.selectedImage = False
         data.finishedImage = False
         data.image = Image()
         data.currentTool = "brush"
+    if data.currentTool == "text":
+        data.text = None
+        data.finishedText, data.selectedText, data.isTyping = False, False, False
+        data.nextStep = False
+        data.currentTool = "brush"
+
 
 
 def mouseReleased(event, data):
