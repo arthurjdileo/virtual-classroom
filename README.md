@@ -2,7 +2,7 @@
 My Carnegie Mellon [15-112](http://www.cs.cmu.edu/~112n18/) Term Project (N18)
 
 ## Description & Purpose: 
-My virtual classroom project intends to serve the vast community of academia by providing a platform in which teachers and students alike can share ideas not only in the confines of a physical classroom. A virtual classroom allows two or more participants to communicate and collaborate in a class-like environment to simulate an actual classroom but with much more convenience and access to learning tools. Such learning tools include the ability to collaborate via a whiteboard using Sockets and Tkinter in Python 3. In the future, I hope to add additional functionality such as an option for audio and/or video chat, and an option to upload and download files through the classroom.
+My virtual classroom project intends to serve the vast community of academia by providing a platform in which teachers and students alike can share ideas not only in the confines of a physical classroom. A virtual classroom allows two or more participants to communicate and collaborate in a class-like environment to simulate an actual classroom but with much more convenience and access to learning tools. Such learning tools include the ability to collaborate via a whiteboard using Sockets and Tkinterface in Python 3. In the future, I hope to add additional functionality such as an option for audio and/or video chat, and an option to upload and download files through the classroom.
 
 ## Getting Started
 The following instructions will explain how to get all of the necessary components of the virtual classroom to run on your local machine. 
