@@ -12,25 +12,29 @@ Assure you have the following modules installed to assure a working virtual clas
 
 ```
 Python 3.6
-flask
-slackclient
-datetime
-apscheduler
-pytz
+Tkinterface
+Math
+Socket
+Threading
+Queue
 ```
 
-### Starting the bot
+### Starting the server (Locally)
 
-In the bot.py file, you can find the channel ID that it will post updates to as well as notification intervals that you can set. Also make sure to set your environment variable in the environment file with your Bot User OAuth Access Token.
-
-```
-clear;python3 bot.py
-```
-
-### Docker
-
-I also included the Dockerfile setup so that if you want you can move it to a Kubernetes platform or similar. If you plan to just use docker, the JSON file is already mounted for you. However, if you move to a Kubernetes platform, you must ensure you account for persistance with the JSON file. I am planning to move to Google Datastore for v2.
+In the virt-class-server.py file, assure that the line starting with HOST is as follows: "HOST = '127.0.0.1'" This will allow the server to connect using your local network. Next, start the server by running it in your favorite IDE or using terminal.
 
 ```
-clear;python3 run_docker.py
+clear;python3 virt-class-server.py
 ```
+
+### Starting the client (Locally)
+
+In the virt-class-client.py file, assure that the line starting with HOST is as follows: "HOST = '127.0.0.1'" This will assure that the client connects to the same network as the server. Now, start the client using your favorite IDE or using terminal. Assure you are using a new terminal window when using the program locally.
+
+```
+clear;python3 virt-class-client.py
+```
+
+## Expansion Plans
+
+Following the conclusion of the course, I wish to expand this program to be open source and to be edited by fellow programmers with the same purpose in mind. Furthermore, I hope that I can eventually use this project to allow programmers to teach individuals in economically disadvanted areas and set-up a platform that will connect these two parties.
